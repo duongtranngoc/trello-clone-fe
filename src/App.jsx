@@ -50,34 +50,44 @@ function ModeSelect() {
 
 function App() {
   return (
-    <Container disableGutters maxWidth={false} sx={{height: '100vh', backgroundColor: 'primary.main'}}>
-      <Box sx={{
-        backgroundColor: 'primary.light',
-        width: '100%',
-        height: theme.trelloCustom.appBarHeight,
-        display: 'flex',
-        alignItems: 'center'
-      }}>
-        <ModeSelect/>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{ height: '100vh', backgroundColor: 'primary.main' }}
+    >
+      <Box
+        sx={{
+          backgroundColor: 'primary.light',
+          width: '100%',
+          height: theme.trelloCustom.appBarHeight,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <ModeSelect />
       </Box>
 
-      <Box sx={{
-        backgroundColor: 'primary.dark',
-        width: '100%',
-        height: theme.trelloCustom.boardBarHeight,
-        display: 'flex',
-        alignItems: 'center'
-      }}>
+      <Box
+        sx={{
+          backgroundColor: 'primary.dark',
+          width: '100%',
+          height: theme.trelloCustom.boardBarHeight,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
         Board_Bar
       </Box>
 
-      <Box sx={{
-        backgroundColor: 'primary.main',
-        width: '100%',
-        height: `calc(100vh - ${theme.trelloCustom.appBarHeight} - ${theme.trelloCustom.boardBarHeight})`,
-        display: 'flex',
-        alignItems: 'center'
-      }}>
+      <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          width: '100%',
+          height: `calc(100vh - ${theme.trelloCustom.appBarHeight} - ${theme.trelloCustom.boardBarHeight})`,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
         Board Content
       </Box>
     </Container>
