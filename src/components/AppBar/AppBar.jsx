@@ -22,7 +22,7 @@ function AppBar() {
       px={2}
       sx={{
         width: '100%',
-        backgroundColor: '#ffff',
+        backgroundColor: (theme) => theme.palette.backgroundColor,
         height: (theme) => theme.trelloCustom.appBarHeight,
         display: 'flex',
         alignItems: 'center',
@@ -43,7 +43,7 @@ function AppBar() {
             sx={{
               color: 'primary.main',
               fontSize: '1.2rem',
-              fontWeight: 'bold',
+              fontWeight: 'bold'
             }}
           >
             Trello
@@ -65,12 +65,12 @@ function AppBar() {
 
         <Tooltip title='Notification'>
           <Badge color='secondary' variant='dot' sx={{ cursor: 'pointer' }}>
-            <NotificationsNoneIcon />
+            <NotificationsNoneIcon sx={{ color: 'primary.main' }} />
           </Badge>
         </Tooltip>
 
         <Tooltip title='Help'>
-          <HelpOutlineIcon sx={{ cursor: 'pointer' }} />
+          <HelpOutlineIcon sx={{ cursor: 'pointer', color: 'primary.main' }} />
         </Tooltip>
 
         <AccountProfiles />
