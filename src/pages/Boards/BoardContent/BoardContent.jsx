@@ -193,7 +193,7 @@ function BoardContent() {
             >
               <CardMedia
                 sx={{ height: 140 }}
-                image='https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-1/414071919_122115312374134316_5999063127509369348_n.jpg?stp=dst-jpg_p200x200&_nc_cat=107&ccb=1-7&_nc_sid=5740b7&_nc_ohc=eAl98ks-NSoAX9BXlvq&_nc_oc=AQmi70YhbiAm9LdIsa__Aa6h5x553R6Whd3zor0onEfGL5sB7nKKcKy_pJp544tm8dA&_nc_ht=scontent.fhan17-1.fna&oh=00_AfAm5wgO1kDQ_vOw-CLpHh5DaNCAlZNv56Fq22zZYwyXVg&oe=65A2CA6B'
+                image=''
                 title='Clone trello'
               />
               <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
@@ -486,7 +486,7 @@ function BoardContent() {
             >
               <CardMedia
                 sx={{ height: 140 }}
-                image='https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-1/414071919_122115312374134316_5999063127509369348_n.jpg?stp=dst-jpg_p200x200&_nc_cat=107&ccb=1-7&_nc_sid=5740b7&_nc_ohc=eAl98ks-NSoAX9BXlvq&_nc_oc=AQmi70YhbiAm9LdIsa__Aa6h5x553R6Whd3zor0onEfGL5sB7nKKcKy_pJp544tm8dA&_nc_ht=scontent.fhan17-1.fna&oh=00_AfAm5wgO1kDQ_vOw-CLpHh5DaNCAlZNv56Fq22zZYwyXVg&oe=65A2CA6B'
+                image=''
                 title='Clone trello'
               />
               <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
