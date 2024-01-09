@@ -100,9 +100,8 @@ function BoardBar() {
               height: 32,
               fontSize: 16,
               border: 'none',
-              '&:hover': {
-                cursor: 'pointer'
-              }
+              cursor: 'pointer',
+              '&:first-of-type': { bgcolor: '#a4b0de' }
             }
           }}
           max={4}
