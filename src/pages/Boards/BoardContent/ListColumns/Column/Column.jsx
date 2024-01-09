@@ -1,33 +1,33 @@
-import React from 'react'
-import Box from '@mui/material/Box'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Divider from '@mui/material/Divider'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import Typography from '@mui/material/Typography'
-import ContentCut from '@mui/icons-material/ContentCut'
-import ContentCopy from '@mui/icons-material/ContentCopy'
-import ContentPaste from '@mui/icons-material/ContentPaste'
-import Cloud from '@mui/icons-material/Cloud'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import Tooltip from '@mui/material/Tooltip'
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
-import AddCardIcon from '@mui/icons-material/AddCard'
-import Button from '@mui/material/Button'
-import DragHandleIcon from '@mui/icons-material/DragHandle'
-import ListCards from './ListCards/ListCards'
-import theme from '~/theme'
+import React from "react";
+import Box from "@mui/material/Box";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Typography from "@mui/material/Typography";
+import ContentCut from "@mui/icons-material/ContentCut";
+import ContentCopy from "@mui/icons-material/ContentCopy";
+import ContentPaste from "@mui/icons-material/ContentPaste";
+import Cloud from "@mui/icons-material/Cloud";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Tooltip from "@mui/material/Tooltip";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import Button from "@mui/material/Button";
+import DragHandleIcon from "@mui/icons-material/DragHandle";
+import ListCards from "./ListCards/ListCards";
+import theme from "~/theme";
 
 function Column() {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <Box
@@ -35,14 +35,14 @@ function Column() {
         minWidth: 300,
         maxWidth: 300,
         bgcolor: (theme) =>
-          theme.palette.mode === 'dark' ? '#333643' : '#ebecf0',
+          theme.palette.mode === "dark" ? "#333643" : "#ebecf0",
         ml: 2,
-        borderRadius: '6px',
-        height: 'fit-content',
+        borderRadius: "6px",
+        height: "fit-content",
         maxHeight: (theme) =>
           `calc(${theme.trelloCustom.boardContentHeight} - ${theme.spacing(
             5
-          )})`
+          )})`,
       }}
     >
       {/* Column Header */}
@@ -50,64 +50,64 @@ function Column() {
         sx={{
           height: theme.trelloCustom.columnHeaderHeight,
           p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <Typography
-          variant='h6'
+          variant="h6"
           sx={{
-            fontSize: '1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer'
+            fontSize: "1rem",
+            fontWeight: "bold",
+            cursor: "pointer",
           }}
         >
           Column Title
         </Typography>
 
         <Box>
-          <Tooltip title='More Option'>
+          <Tooltip title="More Option">
             <ExpandMoreIcon
-              sx={{ color: 'text.primary', cursor: 'pointer' }}
-              id='basic-column-dropdown'
-              aria-controls={open ? 'basic-menu-column-dropdown' : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? 'true' : undefined}
+              sx={{ color: "text.primary", cursor: "pointer" }}
+              id="basic-column-dropdown"
+              aria-controls={open ? "basic-menu-column-dropdown" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             />
           </Tooltip>
 
           <Menu
-            id='basic-menu-column-dropdown'
+            id="basic-menu-column-dropdown"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
             MenuListProps={{
-              'aria-labelledby': 'basic-column-dropdown'
+              "aria-labelledby": "basic-column-dropdown",
             }}
           >
             <MenuItem>
               <ListItemIcon>
-                <AddCardIcon fontSize='small' />
+                <AddCardIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Add new card</ListItemText>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <ContentCut fontSize='small' />
+                <ContentCut fontSize="small" />
               </ListItemIcon>
               <ListItemText>Cut</ListItemText>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <ContentCopy fontSize='small' />
+                <ContentCopy fontSize="small" />
               </ListItemIcon>
               <ListItemText>Copy</ListItemText>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <ContentPaste fontSize='small' />
+                <ContentPaste fontSize="small" />
               </ListItemIcon>
               <ListItemText>Paste</ListItemText>
             </MenuItem>
@@ -116,13 +116,13 @@ function Column() {
 
             <MenuItem>
               <ListItemIcon>
-                <DeleteSweepIcon fontSize='small' />
+                <DeleteSweepIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Remove this column</ListItemText>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <Cloud fontSize='small' />
+                <Cloud fontSize="small" />
               </ListItemIcon>
               <ListItemText>Archive this column</ListItemText>
             </MenuItem>
@@ -138,18 +138,18 @@ function Column() {
         sx={{
           height: theme.trelloCustom.columnFooterHeight,
           p: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <Button startIcon={<AddCardIcon />}>Add new card</Button>
-        <Tooltip title='Drag to move'>
-          <DragHandleIcon sx={{ cursor: 'pointer' }} />
+        <Tooltip title="Drag to move">
+          <DragHandleIcon sx={{ cursor: "pointer" }} />
         </Tooltip>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default Column
+export default Column;

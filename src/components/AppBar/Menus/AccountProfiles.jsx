@@ -1,57 +1,53 @@
-import Logout from '@mui/icons-material/Logout'
-import PersonAdd from '@mui/icons-material/PersonAdd'
-import Settings from '@mui/icons-material/Settings'
-import { IconButton, Tooltip } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import React from 'react'
+import Logout from "@mui/icons-material/Logout";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import { IconButton, Tooltip } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import React from "react";
 
 function AccountProfiles() {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <Box>
-      <Tooltip title='Account settings'>
+      <Tooltip title="Account settings">
         <IconButton
           onClick={handleClick}
-          size='small'
+          size="small"
           sx={{ padding: 0 }}
-          aria-controls={open ? 'basic-menu-account-profiles' : undefined}
-          aria-haspopup='true'
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "basic-menu-account-profiles" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
         >
-          <Avatar
-            sx={{ width: 32, height: 32 }}
-            alt='duongtranngoc'
-            src=''
-          />
+          <Avatar sx={{ width: 32, height: 32 }} alt="duongtranngoc" src="" />
         </IconButton>
       </Tooltip>
       <Menu
-        id='basic-menu-account-profiles'
+        id="basic-menu-account-profiles"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button-account-profiles'
+          "aria-labelledby": "basic-button-account-profiles",
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar sx={{ width: 32, height: 32, mr: 2 }}/> Profile
+          <Avatar sx={{ width: 32, height: 32, mr: 2 }} /> Profile
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar sx={{ width: 32, height: 32, mr: 2 }}/> My account
+          <Avatar sx={{ width: 32, height: 32, mr: 2 }} /> My account
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
@@ -74,7 +70,7 @@ function AccountProfiles() {
         </MenuItem>
       </Menu>
     </Box>
-  )
+  );
 }
 
-export default AccountProfiles
+export default AccountProfiles;
