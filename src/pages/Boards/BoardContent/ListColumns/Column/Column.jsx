@@ -18,16 +18,19 @@ import Button from "@mui/material/Button";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ListCards from "./ListCards/ListCards";
 import theme from "~/theme";
+import { mapOrder } from "~/ultis/sorts";
 
-function Column() {
+function Column({ column }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
+  const orderedCards = mapOrder(
+    column?.cards,
+    column?.cardOrderIds,
+    "cards_id"
+  );
 
   return (
     <Box
@@ -63,7 +66,7 @@ function Column() {
             cursor: "pointer",
           }}
         >
-          Column Title
+          {column?.title}
         </Typography>
 
         <Box>
@@ -131,7 +134,7 @@ function Column() {
       </Box>
 
       {/* List Card */}
-      <ListCards />
+      <ListCards cards={orderedCards} />
 
       {/* Column Footer */}
       <Box
