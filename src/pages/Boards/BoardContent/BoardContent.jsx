@@ -18,7 +18,7 @@ function BoardContent({ board }) {
   });
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 0,
+      delay: 200,
       tolerance: 500,
     },
   });
