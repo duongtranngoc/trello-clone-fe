@@ -27,7 +27,7 @@ function ListCards({ cards }) {
       }}
     >
       {cards?.map((card) => (
-        <Card key={card.cards_id} card={card} />
+        <Card key={card.card_id} card={card} />
       ))}
     </Box>
   );

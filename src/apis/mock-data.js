@@ -9,7 +9,7 @@ export const mockData = {
     columnOrderIds: ["column-id-01", "column-id-02", "column-id-03"],
     columns: [
       {
-        columns_id: "column-id-01",
+        column_id: "column-id-01",
         boardId: "board-id-01",
         title: "To Do Column 01",
         cardOrderIds: [
@@ -23,7 +23,7 @@ export const mockData = {
         ],
         cards: [
           {
-            cards_id: "card-id-01",
+            card_id: "card-id-01",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 01",
@@ -39,7 +39,7 @@ export const mockData = {
             ],
           },
           {
-            cards_id: "card-id-02",
+            card_id: "card-id-02",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 02",
@@ -50,7 +50,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-03",
+            card_id: "card-id-03",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 03",
@@ -61,7 +61,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-04",
+            card_id: "card-id-04",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 04",
@@ -72,7 +72,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-05",
+            card_id: "card-id-05",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 05",
@@ -83,7 +83,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-06",
+            card_id: "card-id-06",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 06",
@@ -94,7 +94,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-07",
+            card_id: "card-id-07",
             boardId: "board-id-01",
             columnId: "column-id-01",
             title: "Title of card 07",
@@ -107,13 +107,13 @@ export const mockData = {
         ],
       },
       {
-        columns_id: "column-id-02",
+        column_id: "column-id-02",
         boardId: "board-id-01",
         title: "Inprogress Column 02",
         cardOrderIds: ["card-id-08", "card-id-09", "card-id-10"],
         cards: [
           {
-            cards_id: "card-id-08",
+            card_id: "card-id-08",
             boardId: "board-id-01",
             columnId: "column-id-02",
             title: "Title of card 08",
@@ -124,7 +124,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-09",
+            card_id: "card-id-09",
             boardId: "board-id-01",
             columnId: "column-id-02",
             title: "Title of card 09",
@@ -135,7 +135,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-10",
+            card_id: "card-id-10",
             boardId: "board-id-01",
             columnId: "column-id-02",
             title: "Title of card 10",
@@ -148,13 +148,13 @@ export const mockData = {
         ],
       },
       {
-        columns_id: "column-id-03",
+        column_id: "column-id-03",
         boardId: "board-id-01",
         title: "Done Column 03",
         cardOrderIds: ["card-id-11", "card-id-12", "card-id-13"],
         cards: [
           {
-            cards_id: "card-id-11",
+            card_id: "card-id-11",
             boardId: "board-id-01",
             columnId: "column-id-03",
             title: "Title of card 11",
@@ -165,7 +165,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-12",
+            card_id: "card-id-12",
             boardId: "board-id-01",
             columnId: "column-id-03",
             title: "Title of card 12",
@@ -176,7 +176,7 @@ export const mockData = {
             attachments: [],
           },
           {
-            cards_id: "card-id-13",
+            card_id: "card-id-13",
             boardId: "board-id-01",
             columnId: "column-id-03",
             title: "Title of card 13",
