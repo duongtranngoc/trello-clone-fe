@@ -20,20 +20,34 @@ import ListCards from "./ListCards/ListCards";
 import theme from "~/theme";
 import { mapOrder } from "~/ultis/sorts";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 function Column({ column }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: column.column_id,
+      data: { ...column },
+    });
+  const dndKitColumnStyles = {
+    touchAction: 'none',
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  const orderedCards = mapOrder(
-    column?.cards,
-    column?.cardOrderIds,
-    "cards_id"
-  );
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "card_id");
 
   return (
     <Box
+      ref={setNodeRef}
+      style={dndKitColumnStyles}
+      {...attributes}
+      {...listeners}
       sx={{
         minWidth: 300,
         maxWidth: 300,

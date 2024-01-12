@@ -3,46 +3,56 @@ import Column from "./Column/Column";
 import Button from "@mui/material/Button";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
+
 function ListColumns({ columns }) {
   return (
-    <Box
-      sx={{
-        bgcolor: "inherit",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        overflowX: "auto",
-        overflowY: "hidden",
-      }}
+    <SortableContext
+      items={columns?.map((c) => c.column_id)}
+      strategy={horizontalListSortingStrategy}
     >
-      {columns?.map((column) => (
-        <Column key={column.columns_id} column={column} />
-      ))}
-
       <Box
         sx={{
-          minWidth: "200px",
-          maxWidth: "200px",
-          mx: 2,
-          borderRadius: "6px",
-          height: "fit-content",
-          bgcolor: "#ffffff3d",
+          bgcolor: "inherit",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          overflowX: "auto",
+          overflowY: "hidden",
         }}
       >
-        <Button
-          startIcon={<NoteAddIcon />}
+        {columns?.map((column) => (
+          <Column key={column.column_id} column={column} />
+        ))}
+
+        <Box
           sx={{
-            color: "white",
-            width: "100%",
-            justifyContent: "flex-start",
-            pl: 2.5,
-            py: 1,
+            minWidth: "200px",
+            maxWidth: "200px",
+            mx: 2,
+            borderRadius: "6px",
+            height: "fit-content",
+            bgcolor: "#ffffff3d",
           }}
         >
-          Add new column
-        </Button>
+          <Button
+            startIcon={<NoteAddIcon />}
+            sx={{
+              color: "white",
+              width: "100%",
+              justifyContent: "flex-start",
+              pl: 2.5,
+              py: 1,
+            }}
+          >
+            Add new column
+          </Button>
+        </Box>
       </Box>
-    </Box>
+    </SortableContext>
   );
 }
 
