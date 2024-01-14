@@ -11,6 +11,7 @@ import {
   defaultDropAnimationSideEffects,
   useSensor,
   useSensors,
+  closestCorners,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -175,6 +176,7 @@ function BoardContent({ board }) {
   return (
     <DndContext
       sensors={sensors}
+      collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
