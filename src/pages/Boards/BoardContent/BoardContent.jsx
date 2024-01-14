@@ -37,14 +37,16 @@ function BoardContent({ board }) {
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
-  const [orderedColumns, set0rderedColumns] = useState([]);
+  const [orderedColumns, setOrderedColumns] = useState([]);
 
   const [activeDragItemId, setActiveDragItemId] = useState(null);
   const [activeDragItemType, setActiveDragItemType] = useState(null);
   const [activeDragItemData, setActiveDragItemData] = useState(null);
+  const [oldColumnWhenDraggingCard, setOldColumnWhenDraggingCard] =
+    useState(null);
 
   useEffect(() => {
-    set0rderedColumns(
+    setOrderedColumns(
       mapOrder(board?.columns, board?.columnOrderIds, "board_id")
     );
   }, [board]);
@@ -63,6 +65,10 @@ function BoardContent({ board }) {
         : ACTIVE_GRA_ITEM_TYPE.COLUMN
     );
     setActiveDragItemData(event?.active?.data?.current);
+
+    if (event?.active?.data?.current?.columnId) {
+      setOldColumnWhenDraggingCard(findColumnByCardId(event?.active?.id));
+    }
   };
 
   const handleDragOver = (event) => {
@@ -82,7 +88,7 @@ function BoardContent({ board }) {
 
     if (!activeColumn || !overColumn) return;
     if (activeColumn.column_id !== overColumn.column_id) {
-      set0rderedColumns((prevColumns) => {
+      setOrderedColumns((prevColumns) => {
         const overCardIndex = overColumn?.cards?.findIndex(
           (card) => card.card_id === overCardId
         );
@@ -138,29 +144,81 @@ function BoardContent({ board }) {
   };
 
   const handleDragEnd = (event) => {
-    if (activeDragItemType === ACTIVE_GRA_ITEM_TYPE.CARD) return;
-
     const { active, over } = event;
 
     if (!active || !over) return;
 
-    if (active.id !== over.id) {
-      const oldIndex = orderedColumns.findIndex(
-        (c) => c.column_id === active.id
+    if (activeDragItemType === ACTIVE_GRA_ITEM_TYPE.CARD) {
+      const {
+        id: activeDraggingCardId,
+        data: { current: activeDragCardData },
+      } = active;
+      const { id: overCardId } = over;
+
+      const activeColumn = findColumnByCardId(activeDraggingCardId);
+      const overColumn = findColumnByCardId(overCardId);
+
+      if (!oldColumnWhenDraggingCard || !overColumn) return;
+
+      if (activeColumn.column_id !== overColumn.column_id) {
+        //
+      } else {
+        const oldCardIndex = oldColumnWhenDraggingCard?.cards?.findIndex(
+          (card) => card.card_id === activeDragItemId
+        );
+        const newCardIndex = overColumn?.cards?.findIndex(
+          (card) => card.card_id === overCardId
+        );
+
+        const dndOrderedCards = arrayMove(
+          oldColumnWhenDraggingCard?.cards,
+          oldCardIndex,
+          newCardIndex
+        );
+
+        setOrderedColumns((prevColumns) => {
+          const nextColumns = cloneDeep(prevColumns);
+
+          const targetColumn = nextColumns.find(
+            (column) => column.column_id === overColumn.column_id
+          );
+
+          targetColumn.cards = dndOrderedCards;
+          targetColumn.cardOrderIds = dndOrderedCards.map(
+            (card) => card.card_id
+          );
+
+          return nextColumns;
+        });
+      }
+    }
+
+    if (
+      activeDragItemType === ACTIVE_GRA_ITEM_TYPE.COLUMN &&
+      active.id !== over.id
+    ) {
+      const oldColumnIndex = orderedColumns.findIndex(
+        (column) => column.column_id === active.id
+      );
+      const newColumnIndex = orderedColumns.findIndex(
+        (column) => column.column_id === over.id
       );
 
-      const newIndex = orderedColumns.findIndex((c) => c.column_id === over.id);
-
-      const dndOrderedColumns = arrayMove(orderedColumns, oldIndex, newIndex);
+      const dndOrderedColumns = arrayMove(
+        orderedColumns,
+        oldColumnIndex,
+        newColumnIndex
+      );
 
       // later handle the api here
       // const dndOrderedColumnsIds = dndOrderedColumns.map((c) => c.column_id);
-      set0rderedColumns(dndOrderedColumns);
+      setOrderedColumns(dndOrderedColumns);
     }
 
     setActiveDragItemId(null);
     setActiveDragItemType(null);
     setActiveDragItemData(null);
+    setOldColumnWhenDraggingCard(null);
   };
 
   const customDropAnimation = {
