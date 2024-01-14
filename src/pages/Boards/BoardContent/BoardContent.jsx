@@ -9,8 +9,18 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+
+import Column from "./ListColumns/Column/Column";
+import Card from "./ListColumns/Column/ListCards/Card/Card";
+
+const ACTIVE_GRA_ITEM_TYPE = {
+  COLUMN: "ACTIVE_GRA_ITEM_TYPE_COLUMN",
+  CARD: "ACTIVE_GRA_ITEM_TYPE_CARD",
+};
 
 function BoardContent({ board }) {
   const mouseSensor = useSensor(MouseSensor, {
@@ -25,11 +35,26 @@ function BoardContent({ board }) {
   const sensors = useSensors(mouseSensor, touchSensor);
 
   const [orderedColumns, set0rderedColumns] = useState([]);
+
+  const [activeDragItemId, setActiveDragItemId] = useState(null);
+  const [activeDragItemType, setActiveDragItemType] = useState(null);
+  const [activeDragItemData, setActiveDragItemData] = useState(null);
+
   useEffect(() => {
     set0rderedColumns(
       mapOrder(board?.columns, board?.columnOrderIds, "board_id")
     );
   }, [board]);
+
+  const handleDragStart = (event) => {
+    setActiveDragItemId(event?.active?.id);
+    setActiveDragItemType(
+      event?.active?.data?.current?.columnId
+        ? ACTIVE_GRA_ITEM_TYPE.CARD
+        : ACTIVE_GRA_ITEM_TYPE.COLUMN
+    );
+    setActiveDragItemData(event?.active?.data?.current);
+  };
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -49,10 +74,28 @@ function BoardContent({ board }) {
       // const dndOrderedColumnsIds = dndOrderedColumns.map((c) => c.column_id);
       set0rderedColumns(dndOrderedColumns);
     }
+
+    setActiveDragItemId(null);
+    setActiveDragItemType(null);
+    setActiveDragItemData(null);
+  };
+
+  const customDropAnimation = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: "0.5",
+        },
+      },
+    }),
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <Box
         sx={{
           bgcolor: (theme) =>
@@ -63,6 +106,16 @@ function BoardContent({ board }) {
         }}
       >
         <ListColumns columns={orderedColumns} />
+
+        <DragOverlay dropAnimation={customDropAnimation}>
+          {!activeDragItemType && null}
+          {activeDragItemType === ACTIVE_GRA_ITEM_TYPE.COLUMN && (
+            <Column column={activeDragItemData} />
+          )}
+          {activeDragItemType === ACTIVE_GRA_ITEM_TYPE.CARD && (
+            <Card card={activeDragItemData} />
+          )}
+        </DragOverlay>
       </Box>
     </DndContext>
   );
