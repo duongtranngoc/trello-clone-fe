@@ -22,7 +22,8 @@ import { arrayMove } from "@dnd-kit/sortable";
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
 
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
+import { generatePlaceholderCard } from "~/ultis/formatters";
 
 const ACTIVE_GRA_ITEM_TYPE = {
   COLUMN: "ACTIVE_GRA_ITEM_TYPE_COLUMN",
@@ -101,6 +102,11 @@ function BoardContent({ board }) {
         nextActiveColumn.cards = nextActiveColumn.cards?.filter(
           (card) => card.card_id !== activeDraggingCardId
         );
+
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)];
+        }
+
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards?.map(
           (card) => card.card_id
         );
@@ -120,6 +126,10 @@ function BoardContent({ board }) {
           newCardIndex,
           0,
           rebuild_activeDraggingCardData
+        );
+
+        nextOverColumn.cards = nextOverColumn.cards.filter(
+          (card) => !card.FE_PlaceholderCard
         );
 
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
