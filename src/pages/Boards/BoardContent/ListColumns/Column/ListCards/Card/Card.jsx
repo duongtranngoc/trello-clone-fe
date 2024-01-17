@@ -19,7 +19,7 @@ function Card({ card }) {
     transition,
     isDragging,
   } = useSortable({
-    id: card.card_id,
+    id: card.cardId,
     data: { ...card },
   });
   const dndKitCardStyles = {

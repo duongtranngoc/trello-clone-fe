@@ -32,7 +32,7 @@ function Column({ column }) {
     transition,
     isDragging,
   } = useSortable({
-    id: column.column_id,
+    id: column.columnId,
     data: { ...column },
   });
   const dndKitColumnStyles = {
@@ -47,7 +47,7 @@ function Column({ column }) {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "card_id");
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "cardId");
 
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
