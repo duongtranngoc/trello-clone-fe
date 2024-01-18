@@ -8,7 +8,7 @@ import {
 function ListCards({ cards }) {
   return (
     <SortableContext
-      items={cards?.map((card) => card.cardId)}
+      items={cards?.map((card) => card._id)}
       strategy={verticalListSortingStrategy}
     >
       <Box
@@ -35,7 +35,7 @@ function ListCards({ cards }) {
         }}
       >
         {cards?.map((card) => (
-          <Card key={card.cardId} card={card} />
+          <Card key={card._id} card={card} />
         ))}
       </Box>
     </SortableContext>

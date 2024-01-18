@@ -58,24 +58,24 @@ function BoardContent({ board }) {
     );
   }, [board]);
 
-  const findColumnByCardId = (cardId) => {
+  const findColumnBy_id = (_id) => {
     return orderedColumns.find((column) =>
-      column.cards?.map((card) => card.cardId)?.includes(cardId)
+      column.cards?.map((card) => card._id)?.includes(_id)
     );
   };
 
   const moveCardBetweenDifferentColumns = (
     overColumn,
-    overCardId,
+    over_id,
     active,
     over,
     activeColumn,
-    activeDraggingCardId,
+    activeDragging_id,
     activeDraggingCardData
   ) => {
     setOrderedColumns((prevColumns) => {
       const overCardIndex = overColumn?.cards?.findIndex(
-        (card) => card.cardId === overCardId
+        (card) => card._id === over_id
       );
 
       let newCardIndex;
@@ -100,7 +100,7 @@ function BoardContent({ board }) {
 
       if (nextActiveColumn) {
         nextActiveColumn.cards = nextActiveColumn.cards?.filter(
-          (card) => card.cardId !== activeDraggingCardId
+          (card) => card._id !== activeDragging_id
         );
 
         if (isEmpty(nextActiveColumn.cards)) {
@@ -108,13 +108,13 @@ function BoardContent({ board }) {
         }
 
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards?.map(
-          (card) => card.cardId
+          (card) => card._id
         );
       }
 
       if (nextOverColumn) {
         nextOverColumn.cards = nextOverColumn.cards.filter(
-          (card) => card.cardId !== activeDraggingCardId
+          (card) => card._id !== activeDragging_id
         );
 
         const rebuild_activeDraggingCardData = {
@@ -133,7 +133,7 @@ function BoardContent({ board }) {
         );
 
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
-          (card) => card.cardId
+          (card) => card._id
         );
       }
 
@@ -151,7 +151,7 @@ function BoardContent({ board }) {
     setActiveDragItemData(event?.active?.data?.current);
 
     if (event?.active?.data?.current?.columnId) {
-      setOldColumnWhenDraggingCard(findColumnByCardId(event?.active?.id));
+      setOldColumnWhenDraggingCard(findColumnBy_id(event?.active?.id));
     }
   };
 
@@ -162,23 +162,23 @@ function BoardContent({ board }) {
     if (!active || !over) return;
 
     const {
-      id: activeDraggingCardId,
+      id: activeDragging_id,
       data: { current: activeDraggingCardData },
     } = active;
-    const { id: overCardId } = over;
+    const { id: over_id } = over;
 
-    const activeColumn = findColumnByCardId(activeDraggingCardId);
-    const overColumn = findColumnByCardId(overCardId);
+    const activeColumn = findColumnBy_id(activeDragging_id);
+    const overColumn = findColumnBy_id(over_id);
 
     if (!activeColumn || !overColumn) return;
     if (activeColumn.columnId !== overColumn.columnId) {
       moveCardBetweenDifferentColumns(
         overColumn,
-        overCardId,
+        over_id,
         active,
         over,
         activeColumn,
-        activeDraggingCardId,
+        activeDragging_id,
         activeDraggingCardData
       );
     }
@@ -191,32 +191,32 @@ function BoardContent({ board }) {
 
     if (activeDragItemType === ACTIVE_GRA_ITEM_TYPE.CARD) {
       const {
-        id: activeDraggingCardId,
+        id: activeDragging_id,
         data: { current: activeDraggingCardData },
       } = active;
-      const { id: overCardId } = over;
+      const { id: over_id } = over;
 
-      const activeColumn = findColumnByCardId(activeDraggingCardId);
-      const overColumn = findColumnByCardId(overCardId);
+      const activeColumn = findColumnBy_id(activeDragging_id);
+      const overColumn = findColumnBy_id(over_id);
 
       if (!activeColumn || !overColumn) return;
 
       if (oldColumnWhenDraggingCard.columnId !== overColumn.columnId) {
         moveCardBetweenDifferentColumns(
           overColumn,
-          overCardId,
+          over_id,
           active,
           over,
           activeColumn,
-          activeDraggingCardId,
+          activeDragging_id,
           activeDraggingCardData
         );
       } else {
         const oldCardIndex = oldColumnWhenDraggingCard?.cards?.findIndex(
-          (card) => card.cardId === activeDragItemId
+          (card) => card._id === activeDragItemId
         );
         const newCardIndex = overColumn?.cards?.findIndex(
-          (card) => card.cardId === overCardId
+          (card) => card._id === over_id
         );
 
         const dndOrderedCards = arrayMove(
@@ -233,9 +233,7 @@ function BoardContent({ board }) {
           );
 
           targetColumn.cards = dndOrderedCards;
-          targetColumn.cardOrderIds = dndOrderedCards.map(
-            (card) => card.cardId
-          );
+          targetColumn.cardOrderIds = dndOrderedCards.map((card) => card._id);
 
           return nextColumns;
         });

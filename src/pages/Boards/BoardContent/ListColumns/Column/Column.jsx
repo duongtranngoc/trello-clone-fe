@@ -47,7 +47,7 @@ function Column({ column }) {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "cardId");
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "_id");
 
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
