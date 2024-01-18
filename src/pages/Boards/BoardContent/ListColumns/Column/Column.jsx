@@ -32,7 +32,7 @@ function Column({ column }) {
     transition,
     isDragging,
   } = useSortable({
-    id: column.columnId,
+    id: column._id,
     data: { ...column },
   });
   const dndKitColumnStyles = {
