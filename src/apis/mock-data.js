@@ -1,6 +1,6 @@
 export const mockData = {
   board: {
-    boardId: "board-id-01",
+    _id: "board-id-01",
     title: "Trello clone",
     description: "Clone handles the boards in the trello website",
     type: "public",

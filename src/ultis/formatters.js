@@ -6,8 +6,8 @@ export const capitalizeFirstLetter = (val) => {
 export const generatePlaceholderCard = (column) => {
   return {
     _id: `${column._id}-placeholder-card`,
-    boardId: column.boardId,
-    _id: column._id,
+    boardId: column._Id,
+    comlumId: column._id,
     FE_PlaceholderCard: true,
   };
 };

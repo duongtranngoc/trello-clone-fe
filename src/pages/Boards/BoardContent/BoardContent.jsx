@@ -53,9 +53,7 @@ function BoardContent({ board }) {
   const lastOverId = useRef(null);
 
   useEffect(() => {
-    setOrderedColumns(
-      mapOrder(board?.columns, board?.columnOrderIds, "boardId")
-    );
+    setOrderedColumns(mapOrder(board?.columns, board?.columnOrderIds, "_id"));
   }, [board]);
 
   const findColumnBy_id = (_id) => {
