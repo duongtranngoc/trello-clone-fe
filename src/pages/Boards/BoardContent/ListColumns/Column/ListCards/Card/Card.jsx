@@ -1,14 +1,16 @@
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 import AttachmentIcon from "@mui/icons-material/Attachment";
 import CommentIcon from "@mui/icons-material/Comment";
 import GroupIcon from "@mui/icons-material/Group";
-import Button from "@mui/material/Button";
+
 import { Card as MuiCard } from "@mui/material";
+import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
 function Card({ card }) {
   const {

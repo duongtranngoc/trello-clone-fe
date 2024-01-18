@@ -1,25 +1,29 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import ModeSelect from "../ModeSelect/ModeSelect";
 import AppsIcon from "@mui/icons-material/Apps";
-import { ReactComponent as Logo } from "~/assets/logo.svg";
+import CloseIcon from "@mui/icons-material/Close";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import SearchIcon from "@mui/icons-material/Search";
+
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
 import SvgIcon from "@mui/material/SvgIcon";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import Workspaces from "./Menus/Workspaces";
+
+import { useState } from "react";
+
+import { ReactComponent as Logo } from "~/assets/logo.svg";
+
+import ModeSelect from "../ModeSelect/ModeSelect";
+import AccountProfiles from "./Menus/AccountProfiles";
 import Recent from "./Menus/Recent";
 import Starred from "./Menus/Starred";
 import Templates from "./Menus/Templates";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Badge from "@mui/material/Badge";
-import Tooltip from "@mui/material/Tooltip";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import AccountProfiles from "./Menus/AccountProfiles";
-import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
-import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
+import Workspaces from "./Menus/Workspaces";
 
 function AppBar() {
   const [searchValue, setSearchValue] = useState("");

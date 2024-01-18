@@ -1,8 +1,10 @@
 import Container from "@mui/material/Container";
+
+import { mockData } from "~/apis/mock-data";
+
 import AppBar from "~/components/AppBar/AppBar";
 import BoardBar from "./BoardBar/BoardBar";
 import BoardContent from "./BoardContent/BoardContent";
-import { mockData } from "~/apis/mock-data";
 
 function BoardDetails() {
   return (

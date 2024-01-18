@@ -1,7 +1,9 @@
-import Box from "@mui/material/Box";
-import Column from "./Column/Column";
-import Button from "@mui/material/Button";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+
+import Column from "./Column/Column";
 
 import {
   SortableContext,
