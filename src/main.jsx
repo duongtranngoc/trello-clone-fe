@@ -10,7 +10,7 @@ import App from "./App.jsx";
 import theme from "./theme.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <CssVarsProvider theme={theme}>
+  <CssVarsProvider theme={theme} defaultMode="system">
     <CssBaseline />
     <App />
     <ToastContainer position="bottom-right" autoClose={3000} theme="light" />
