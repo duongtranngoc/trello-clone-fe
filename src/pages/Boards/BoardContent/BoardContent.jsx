@@ -1,8 +1,6 @@
 import {
   DndContext,
   DragOverlay,
-  MouseSensor,
-  TouchSensor,
   closestCorners,
   defaultDropAnimationSideEffects,
   getFirstCollision,
@@ -17,6 +15,8 @@ import Box from "@mui/material/Box";
 import { cloneDeep, isEmpty } from "lodash";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+
+import { MouseSensor, TouchSensor } from "~/customLibraries/DndKitSensors";
 
 import { generatePlaceholderCard } from "~/ultis/formatters";
 import { mapOrder } from "~/ultis/sorts";

@@ -117,6 +117,7 @@ function Column({ column }) {
               <ExpandMoreIcon
                 sx={{ color: "text.primary", cursor: "pointer" }}
                 id="basic-column-dropdown"
+                data-no-dnd="true"
                 aria-controls={open ? "basic-menu-column-dropdown" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
@@ -196,8 +197,10 @@ function Column({ column }) {
                 justifyContent: "space-between",
               }}
             >
-              <Button startIcon={<AddCardIcon />}>Add new card</Button>
-              <Tooltip title="Drag to move">
+              <Button startIcon={<AddCardIcon />} data-no-dnd="true">
+                Add new card
+              </Button>
+              <Tooltip title="Drag to move" data-no-dnd="true">
                 <DragHandleIcon sx={{ cursor: "pointer" }} />
               </Tooltip>
             </Box>
@@ -216,6 +219,7 @@ function Column({ column }) {
                 size="small"
                 variant="outlined"
                 autoFocus
+                data-no-dnd="true"
                 value={newCardTitle}
                 onChange={(e) => setNewCardTitle(e.target.value)}
                 sx={{
@@ -257,6 +261,7 @@ function Column({ column }) {
                   variant="contained"
                   color="success"
                   size="small"
+                  data-no-dnd="true"
                   sx={{
                     color: "white",
                     boxShadow: "none",
@@ -273,6 +278,7 @@ function Column({ column }) {
                 <CloseIcon
                   onClick={clearNewColumnForm}
                   fontSize="small"
+                  data-no-dnd="true"
                   sx={{
                     color: (theme) => theme.palette.error.dark,
                     cursor: "pointer",
