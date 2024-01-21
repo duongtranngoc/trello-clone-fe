@@ -23,7 +23,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 import theme from "~/theme";
 
 import { mapOrder } from "~/ultis/sorts";
@@ -59,9 +59,10 @@ function Column({ column }) {
   const [openNewCardForm, setOpenNewCardForm] = useState(false);
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm);
 
-  const [newCardTitle, setNewCardTitle] = useState("false");
+  const [newCardTitle, setNewCardTitle] = useState("");
   const addNewCard = () => {
     if (!newCardTitle) {
+      toast.warning("Please enter a title for the new card!");
       return;
     }
 
