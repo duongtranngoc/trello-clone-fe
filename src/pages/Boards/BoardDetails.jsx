@@ -29,6 +29,11 @@ function BoardDetails() {
       ...newColumnData,
       boardId: board._id,
     });
+
+    const newBoard = { ...board };
+    newBoard.columns.push(createdNewColumn);
+    newBoard.columnOrderIds.push(createdNewColumn._id);
+    setBoard(newBoard);
   };
 
   const createNewCard = async (newCardData) => {
@@ -36,6 +41,17 @@ function BoardDetails() {
       ...newCardData,
       boardId: board._id,
     });
+
+    const newBoard = { ...board };
+    const columnToUpdate = newBoard.columns.find(
+      (column) => column._id === createdNewCard.columnId
+    );
+
+    if (columnToUpdate) {
+      columnToUpdate.cards.push(createdNewCard);
+      columnToUpdate.cardOrderIds.push(createdNewCard._id);
+    }
+    setBoard(newBoard);
   };
 
   return (
