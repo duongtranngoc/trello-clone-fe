@@ -26,8 +26,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import theme from "~/theme";
 
-import { mapOrder } from "~/ultis/sorts";
-
 import ListCards from "./ListCards/ListCards";
 
 function Column({ column, createNewCard }) {
@@ -54,7 +52,7 @@ function Column({ column, createNewCard }) {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "_id");
+  const orderedCards = column.cards;
 
   const [openNewCardForm, setOpenNewCardForm] = useState(false);
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm);

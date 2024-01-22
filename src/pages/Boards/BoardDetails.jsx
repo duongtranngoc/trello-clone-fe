@@ -1,4 +1,7 @@
 import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import Box from "@mui/material/Box";
 
 import { isEmpty } from "lodash";
 
@@ -11,7 +14,9 @@ import {
   createNewColumnAPI,
   fetchBoardDetailsAPI,
   updateBoardDetailsAPI,
+  updateColumnDetailsAPI,
 } from "~/apis";
+import { mapOrder } from "~/ultis/sorts";
 
 import AppBar from "~/components/AppBar/AppBar";
 
@@ -19,6 +24,7 @@ import { generatePlaceholderCard } from "~/ultis/formatters";
 
 import BoardBar from "./BoardBar/BoardBar";
 import BoardContent from "./BoardContent/BoardContent";
+import { Typography } from "@mui/material";
 
 function BoardDetails() {
   const [board, setBoard] = useState(null);
@@ -27,10 +33,13 @@ function BoardDetails() {
     const boardId = "65aeb712914def434d17694a";
 
     fetchBoardDetailsAPI(boardId).then((board) => {
+      board.columns = mapOrder(board.columns, board.columnOrderIds, "_id");
       board.columns.forEach((column) => {
         if (isEmpty(column.cards)) {
           column.cards = [generatePlaceholderCard(column)];
           column.cardOrderIds = [generatePlaceholderCard(column)._id];
+        } else {
+          column.cards = mapOrder(column.cards, column.cardOrderIds, "_id");
         }
       });
       setBoard(board);
@@ -85,6 +94,41 @@ function BoardDetails() {
     });
   };
 
+  const moveCardInTheSameColumns = (
+    dndOrderedCards,
+    dndOrderedCardIds,
+    columnId
+  ) => {
+    const newBoard = { ...board };
+    const columnToUpdate = newBoard.columns.find(
+      (column) => column._id === columnId
+    );
+    if (columnToUpdate) {
+      columnToUpdate.cards = dndOrderedCards;
+      columnToUpdate.cardOrderIds = dndOrderedCardIds;
+    }
+    setBoard(newBoard);
+
+    updateColumnDetailsAPI(columnId, { cardOrderIds: dndOrderedCardIds });
+  };
+
+  if (!board) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+        <Typography>Loading...</Typography>
+      </Box>
+    );
+  }
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <AppBar />
@@ -94,6 +138,7 @@ function BoardDetails() {
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
         moveColumns={moveColumns}
+        moveCardInTheSameColumns={moveCardInTheSameColumns}
       />
     </Container>
   );

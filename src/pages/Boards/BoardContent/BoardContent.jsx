@@ -19,7 +19,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { MouseSensor, TouchSensor } from "~/customLibraries/DndKitSensors";
 
 import { generatePlaceholderCard } from "~/ultis/formatters";
-import { mapOrder } from "~/ultis/sorts";
 
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
@@ -30,7 +29,13 @@ const ACTIVE_GRA_ITEM_TYPE = {
   CARD: "ACTIVE_GRA_ITEM_TYPE_CARD",
 };
 
-function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
+function BoardContent({
+  board,
+  createNewColumn,
+  createNewCard,
+  moveColumns,
+  moveCardInTheSameColumns,
+}) {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: { distance: 10 },
   });
@@ -53,7 +58,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   const lastOverId = useRef(null);
 
   useEffect(() => {
-    setOrderedColumns(mapOrder(board?.columns, board?.columnOrderIds, "_id"));
+    setOrderedColumns(board.columns);
   }, [board]);
 
   const findColumnByCardId = (cardId) => {
@@ -223,6 +228,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
           newCardIndex
         );
 
+        const dndOrderedCardIds = dndOrderedCards.map((card) => card._id);
+
         setOrderedColumns((prevColumns) => {
           const nextColumns = cloneDeep(prevColumns);
 
@@ -231,10 +238,16 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
           );
 
           targetColumn.cards = dndOrderedCards;
-          targetColumn.cardOrderIds = dndOrderedCards.map((card) => card._id);
+          targetColumn.cardOrderIds = dndOrderedCardIds;
 
           return nextColumns;
         });
+
+        moveCardInTheSameColumns(
+          dndOrderedCards,
+          dndOrderedCardIds,
+          oldColumnWhenDraggingCard._id
+        );
       }
     }
 
