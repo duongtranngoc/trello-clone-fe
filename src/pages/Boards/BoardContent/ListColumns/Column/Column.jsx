@@ -30,7 +30,7 @@ import { mapOrder } from "~/ultis/sorts";
 
 import ListCards from "./ListCards/ListCards";
 
-function Column({ column }) {
+function Column({ column, createNewCard }) {
   const {
     attributes,
     listeners,
@@ -60,14 +60,20 @@ function Column({ column }) {
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm);
 
   const [newCardTitle, setNewCardTitle] = useState("");
-  const addNewCard = () => {
+  const addNewCard = async () => {
     if (!newCardTitle) {
       toast.warning("Please enter a title for the new card!");
       return;
     }
 
-    toggleOpenNewCardForm();
-    setNewCardTitle("");
+    const newCardData = {
+      title: newCardTitle,
+      columnId: column._id,
+    };
+
+    await createNewCard(newCardData);
+
+    clearNewColumnForm();
   };
   const clearNewColumnForm = () => {
     setNewCardTitle("");

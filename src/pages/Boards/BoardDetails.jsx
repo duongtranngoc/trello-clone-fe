@@ -7,7 +7,11 @@ import BoardBar from "./BoardBar/BoardBar";
 import BoardContent from "./BoardContent/BoardContent";
 import { useEffect, useState } from "react";
 
-import { fetchBoardDetailsAPI } from "~/apis";
+import {
+  fetchBoardDetailsAPI,
+  createNewColumnAPI,
+  createNewCardAPI,
+} from "~/apis";
 
 function BoardDetails() {
   const [board, setBoard] = useState(null);
@@ -20,11 +24,29 @@ function BoardDetails() {
     });
   }, []);
 
+  const createNewColumn = async (newColumnData) => {
+    const createdNewColumn = await createNewColumnAPI({
+      ...newColumnData,
+      boardId: board._id,
+    });
+  };
+
+  const createNewCard = async (newCardData) => {
+    const createdNewCard = await createNewCardAPI({
+      ...newCardData,
+      boardId: board._id,
+    });
+  };
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <AppBar />
       <BoardBar board={board} />
-      <BoardContent board={board} />
+      <BoardContent
+        board={board}
+        createNewColumn={createNewColumn}
+        createNewCard={createNewCard}
+      />
     </Container>
   );
 }
