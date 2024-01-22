@@ -24,7 +24,7 @@ function BoardDetails() {
   const [board, setBoard] = useState(null);
 
   useEffect(() => {
-    const boardId = "65ad1feeea0445b06cff80fc";
+    const boardId = "65aeb712914def434d17694a";
 
     fetchBoardDetailsAPI(boardId).then((board) => {
       board.columns.forEach((column) => {
