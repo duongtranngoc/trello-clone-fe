@@ -255,8 +255,8 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
         newColumnIndex
       );
 
-      moveColumns(dndOrderedColumns);
       setOrderedColumns(dndOrderedColumns);
+      moveColumns(dndOrderedColumns);
     }
 
     setActiveDragItemId(null);

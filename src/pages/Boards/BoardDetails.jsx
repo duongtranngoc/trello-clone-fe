@@ -72,7 +72,7 @@ function BoardDetails() {
     setBoard(newBoard);
   };
 
-  const moveColumns = async (dndOrderedColumns) => {
+  const moveColumns = (dndOrderedColumns) => {
     const dndOrderedColumnsIds = dndOrderedColumns.map((column) => column._id);
 
     const newBoard = { ...board };
@@ -80,7 +80,7 @@ function BoardDetails() {
     newBoard.columnOrderIds = dndOrderedColumnsIds;
     setBoard(newBoard);
 
-    await updateBoardDetailsAPI(newBoard._id, {
+    updateBoardDetailsAPI(newBoard._id, {
       columnOrderIds: dndOrderedColumnsIds,
     });
   };

@@ -21,7 +21,7 @@ function ListColumns({ columns, createNewColumn, createNewCard }) {
     setOpenNewColumnForm(!openNewColumnForm);
 
   const [newColumnTitle, setNewColumnTitle] = useState("");
-  const addNewColumn = async () => {
+  const addNewColumn = () => {
     if (!newColumnTitle) {
       toast.warning("Please enter a title for the new column!", {
         position: "bottom-left",
@@ -33,7 +33,7 @@ function ListColumns({ columns, createNewColumn, createNewCard }) {
       title: newColumnTitle,
     };
 
-    await createNewColumn(newColumnData);
+    createNewColumn(newColumnData);
 
     clearNewColumnForm();
   };
