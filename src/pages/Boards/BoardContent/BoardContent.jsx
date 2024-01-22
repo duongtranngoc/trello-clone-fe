@@ -30,7 +30,7 @@ const ACTIVE_GRA_ITEM_TYPE = {
   CARD: "ACTIVE_GRA_ITEM_TYPE_CARD",
 };
 
-function BoardContent({ board, createNewColumn, createNewCard }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: { distance: 10 },
   });
@@ -257,8 +257,7 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
         newColumnIndex
       );
 
-      // later handle the api here
-      // const dndOrderedColumnsIds = dndOrderedColumns.map((c) => c.columnId);
+      moveColumns(dndOrderedColumns);
       setOrderedColumns(dndOrderedColumns);
     }
 

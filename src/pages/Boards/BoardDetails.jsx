@@ -10,6 +10,7 @@ import {
   createNewCardAPI,
   createNewColumnAPI,
   fetchBoardDetailsAPI,
+  updateBoardDetailsAPI,
 } from "~/apis";
 
 import AppBar from "~/components/AppBar/AppBar";
@@ -71,6 +72,19 @@ function BoardDetails() {
     setBoard(newBoard);
   };
 
+  const moveColumns = async (dndOrderedColumns) => {
+    const dndOrderedColumnsIds = dndOrderedColumns.map((column) => column._id);
+
+    const newBoard = { ...board };
+    newBoard.columns = dndOrderedColumns;
+    newBoard.columnOrderIds = dndOrderedColumnsIds;
+    setBoard(newBoard);
+
+    await updateBoardDetailsAPI(newBoard._id, {
+      columnOrderIds: dndOrderedColumnsIds,
+    });
+  };
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <AppBar />
@@ -79,6 +93,7 @@ function BoardDetails() {
         board={board}
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
+        moveColumns={moveColumns}
       />
     </Container>
   );
