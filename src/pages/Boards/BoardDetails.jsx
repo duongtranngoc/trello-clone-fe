@@ -1,17 +1,23 @@
 import Container from "@mui/material/Container";
 
-// import { mockData } from "~/apis/mock-data";
+import { isEmpty } from "lodash";
 
-import AppBar from "~/components/AppBar/AppBar";
-import BoardBar from "./BoardBar/BoardBar";
-import BoardContent from "./BoardContent/BoardContent";
 import { useEffect, useState } from "react";
 
+// import { mockData } from "~/apis/mock-data";
+
 import {
-  fetchBoardDetailsAPI,
-  createNewColumnAPI,
   createNewCardAPI,
+  createNewColumnAPI,
+  fetchBoardDetailsAPI,
 } from "~/apis";
+
+import AppBar from "~/components/AppBar/AppBar";
+
+import { generatePlaceholderCard } from "~/ultis/formatters";
+
+import BoardBar from "./BoardBar/BoardBar";
+import BoardContent from "./BoardContent/BoardContent";
 
 function BoardDetails() {
   const [board, setBoard] = useState(null);
@@ -20,6 +26,12 @@ function BoardDetails() {
     const boardId = "65ad1feeea0445b06cff80fc";
 
     fetchBoardDetailsAPI(boardId).then((board) => {
+      board.columns.forEach((column) => {
+        if (isEmpty(column.cards)) {
+          column.cards = [generatePlaceholderCard(column)];
+          column.cardOrderIds = [generatePlaceholderCard(column)._id];
+        }
+      });
       setBoard(board);
     });
   }, []);
@@ -29,6 +41,11 @@ function BoardDetails() {
       ...newColumnData,
       boardId: board._id,
     });
+
+    createNewColumn.cards = [generatePlaceholderCard(createNewColumn)];
+    createNewColumn.cardOrderIds = [
+      generatePlaceholderCard(createNewColumn)._id,
+    ];
 
     const newBoard = { ...board };
     newBoard.columns.push(createdNewColumn);
