@@ -35,6 +35,7 @@ function BoardContent({
   createNewCard,
   moveColumns,
   moveCardInTheSameColumns,
+  moveCardToDifferentColumn,
 }) {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: { distance: 10 },
@@ -74,7 +75,8 @@ function BoardContent({
     over,
     activeColumn,
     activeDraggingCardId,
-    activeDraggingCardData
+    activeDraggingCardData,
+    triggerForm
   ) => {
     setOrderedColumns((prevColumns) => {
       const overCardIndex = overColumn?.cards?.findIndex(
@@ -140,6 +142,14 @@ function BoardContent({
         );
       }
 
+      if (triggerForm === "handleDragEnd") {
+        moveCardToDifferentColumn(
+          activeDraggingCardId,
+          oldColumnWhenDraggingCard._id,
+          nextOverColumn._id,
+          nextColumns
+        );
+      }
       return nextColumns;
     });
   };
@@ -182,7 +192,8 @@ function BoardContent({
         over,
         activeColumn,
         activeDraggingCardId,
-        activeDraggingCardData
+        activeDraggingCardData,
+        "handleDragOver"
       );
     }
   };
@@ -212,7 +223,8 @@ function BoardContent({
           over,
           activeColumn,
           activeDraggingCardId,
-          activeDraggingCardData
+          activeDraggingCardData,
+          "handleDragEnd"
         );
       } else {
         const oldCardIndex = oldColumnWhenDraggingCard?.cards?.findIndex(

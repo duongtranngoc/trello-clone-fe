@@ -36,3 +36,12 @@ export const createNewCardAPI = async (newCardData) => {
 
   return request.data;
 };
+
+export const moveCardToDifferentColumnAPI = async (updateData) => {
+  const request = await axios.put(
+    `${API_BASE}/v1/boards/supports/moving_card`,
+    updateData
+  );
+
+  return request.data;
+};

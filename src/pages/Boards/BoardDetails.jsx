@@ -15,6 +15,7 @@ import {
   fetchBoardDetailsAPI,
   updateBoardDetailsAPI,
   updateColumnDetailsAPI,
+  moveCardToDifferentColumnAPI,
 } from "~/apis";
 import { mapOrder } from "~/ultis/sorts";
 
@@ -112,6 +113,32 @@ function BoardDetails() {
     updateColumnDetailsAPI(columnId, { cardOrderIds: dndOrderedCardIds });
   };
 
+  const moveCardToDifferentColumn = (
+    currentCardId,
+    prevColumnId,
+    nextColumnId,
+    dndOrderedColumns
+  ) => {
+    const dndOrderedColumnsIds = dndOrderedColumns.map((column) => column._id);
+
+    const newBoard = { ...board };
+    newBoard.columns = dndOrderedColumns;
+    newBoard.columnOrderIds = dndOrderedColumnsIds;
+    setBoard(newBoard);
+
+    moveCardToDifferentColumnAPI({
+      currentCardId,
+      prevColumnId,
+      prevCardOrderIds: dndOrderedColumns.find(
+        (column) => column._id === prevColumnId
+      )?.cardOrderIds,
+      nextColumnId,
+      nextCardOrderIds: dndOrderedColumns.find(
+        (column) => column._id === nextColumnId
+      )?.cardOrderIds,
+    });
+  };
+
   if (!board) {
     return (
       <Box
@@ -139,6 +166,7 @@ function BoardDetails() {
         createNewCard={createNewCard}
         moveColumns={moveColumns}
         moveCardInTheSameColumns={moveCardInTheSameColumns}
+        moveCardToDifferentColumn={moveCardToDifferentColumn}
       />
     </Container>
   );
