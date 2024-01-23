@@ -16,6 +16,7 @@ import {
   updateBoardDetailsAPI,
   updateColumnDetailsAPI,
   moveCardToDifferentColumnAPI,
+  deleteColumnDetailsAPI,
 } from "~/apis";
 import { mapOrder } from "~/ultis/sorts";
 
@@ -26,6 +27,7 @@ import { generatePlaceholderCard } from "~/ultis/formatters";
 import BoardBar from "./BoardBar/BoardBar";
 import BoardContent from "./BoardContent/BoardContent";
 import { Typography } from "@mui/material";
+import { toast } from "react-toastify";
 
 function BoardDetails() {
   const [board, setBoard] = useState(null);
@@ -156,6 +158,22 @@ function BoardDetails() {
     });
   };
 
+  const deleteColumnDetails = (columnId) => {
+    deleteColumnDetailsAPI(columnId).then((response) => {
+      toast.success(response?.deleteMessage);
+    });
+
+    const newBoard = { ...board };
+    newBoard.columns = newBoard.columns.filter(
+      (column) => column._id !== columnId
+    );
+    newBoard.columnOrderIds = newBoard.columnOrderIds.filter(
+      (_id) => _id !== columnId
+    );
+
+    setBoard(newBoard);
+  };
+
   if (!board) {
     return (
       <Box
@@ -184,6 +202,7 @@ function BoardDetails() {
         moveColumns={moveColumns}
         moveCardInTheSameColumns={moveCardInTheSameColumns}
         moveCardToDifferentColumn={moveCardToDifferentColumn}
+        deleteColumnDetails={deleteColumnDetails}
       />
     </Container>
   );

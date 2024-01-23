@@ -31,7 +31,7 @@ import theme from "~/theme";
 
 import ListCards from "./ListCards/ListCards";
 
-function Column({ column, createNewCard }) {
+function Column({ column, createNewCard, deleteColumnDetails }) {
   const {
     attributes,
     listeners,
@@ -88,9 +88,11 @@ function Column({ column, createNewCard }) {
       title: "Delete Column?",
       description:
         "This action will permanently delete your Column and its Cards! Are you sure?",
+      confirmationText: "Confirm",
+      cancellationText: "Cancel",
     })
       .then(() => {
-        /* ... */
+        deleteColumnDetails(column._id);
       })
       .catch(() => {});
   };
