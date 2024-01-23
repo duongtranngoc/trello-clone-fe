@@ -7,7 +7,7 @@ import Cloud from "@mui/icons-material/Cloud";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import ContentCut from "@mui/icons-material/ContentCut";
 import ContentPaste from "@mui/icons-material/ContentPaste";
-import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -22,8 +22,11 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
+import { useConfirm } from "material-ui-confirm";
+
 import { useState } from "react";
 import { toast } from "react-toastify";
+
 import theme from "~/theme";
 
 import ListCards from "./ListCards/ListCards";
@@ -73,9 +76,23 @@ function Column({ column, createNewCard }) {
 
     clearNewColumnForm();
   };
+
   const clearNewColumnForm = () => {
     setNewCardTitle("");
     toggleOpenNewCardForm();
+  };
+
+  const confirmDeleteColumn = useConfirm();
+  const handlerDeleteColumn = () => {
+    confirmDeleteColumn({
+      title: "Delete Column?",
+      description:
+        "This action will permanently delete your Column and its Cards! Are you sure?",
+    })
+      .then(() => {
+        /* ... */
+      })
+      .catch(() => {});
   };
 
   return (
@@ -134,12 +151,23 @@ function Column({ column, createNewCard }) {
               id="basic-menu-column-dropdown"
               anchorEl={anchorEl}
               open={open}
+              onClick={handleClose}
               onClose={handleClose}
               MenuListProps={{
                 "aria-labelledby": "basic-column-dropdown",
               }}
             >
-              <MenuItem>
+              <MenuItem
+                onClick={toggleOpenNewCardForm}
+                sx={{
+                  "&:hover": {
+                    color: "success.light",
+                    "& .MuiListItemIcon-root": {
+                      color: "success.light",
+                    },
+                  },
+                }}
+              >
                 <ListItemIcon>
                   <AddCardIcon fontSize="small" />
                 </ListItemIcon>
@@ -166,11 +194,21 @@ function Column({ column, createNewCard }) {
 
               <Divider />
 
-              <MenuItem>
+              <MenuItem
+                onClick={handlerDeleteColumn}
+                sx={{
+                  "&:hover": {
+                    color: "warning.dark",
+                    "& .MuiListItemIcon-root": {
+                      color: "warning.dark",
+                    },
+                  },
+                }}
+              >
                 <ListItemIcon>
-                  <DeleteSweepIcon fontSize="small" />
+                  <DeleteForeverIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Remove this column</ListItemText>
+                <ListItemText>Delete this column</ListItemText>
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
